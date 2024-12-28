@@ -52,6 +52,9 @@ if [ ! -f "$HOME/proxy.txt" ]; then
   exit 1
 fi
 
+# Convert CRLF to LF in case the file has Windows line endings
+sed -i 's/\r$//' "$HOME/proxy.txt"
+
 # Extract the first proxy line from proxy.txt
 PROXY_LINE=$(head -n 1 "$HOME/proxy.txt")
 PROXY_HOST=$(echo "$PROXY_LINE" | cut -d':' -f1)
